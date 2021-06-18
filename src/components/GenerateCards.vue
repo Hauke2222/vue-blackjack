@@ -1,14 +1,24 @@
-<template> </template>
+<template>
+  <button
+    @click="
+      generateDeckOfCards();
+      passDataToScoreComponent();
+    "
+  >
+    Kaarten
+  </button>
+</template>
 
 <script>
+import Card from "./card.js";
+
 export default {
   methods: {
     generateDeckOfCards() {
       this.deckOfCards = [];
-
-      for (i = 0; i < this.cardSuit.length; i++) {
-        for (j = 0; j < this.cardRank.length; j++) {
-          deckOfCards.push(
+      for (let i = 0; i < this.cardSuit.length; i++) {
+        for (let j = 0; j < this.cardRank.length; j++) {
+          this.deckOfCards.push(
             new Card(
               this.cardSuit[i],
               this.cardRank[j].rank,
@@ -17,6 +27,9 @@ export default {
           );
         }
       }
+    },
+    passDataToScoreComponent() {
+      this.$root.$emit("clicked", this.deckOfCards);
     },
   },
   data() {
@@ -38,6 +51,7 @@ export default {
         { rank: "King", value: 10 },
       ],
       cardSuit: ["Clubs", "Diamonds", "Hearts", "Spades"],
+      unicodes: [],
     };
   },
 };
