@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Card from "./card.js";
+import Card from "../card.js";
 
 export default {
   methods: {

@@ -3,13 +3,16 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-const store = new Vuex.Store({
+export default new Vuex.Store({
   state: {
-    count: 0,
+    deckOfCards: [],
   },
   mutations: {
-    increment(state) {
-      state.count++;
+    generateCards(state, payload) {
+      state.deckOfCards = payload;
     },
   },
+  actions: {},
+  modules: {},
+  getters: {},
 });
