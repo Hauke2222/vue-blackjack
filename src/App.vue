@@ -2,18 +2,22 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <h1>Blackjack</h1>
-    <GenerateCards />
+    <!-- <GenerateCards /> -->
+    <button @click="$store.commit('generateDeckOfCards')">
+      Kaarten
+    </button>
   </div>
 </template>
 
 <script>
-import GenerateCards from "./components/GenerateCards.vue";
+//import GenerateCards from "./components/GenerateCards.vue";
 
 export default {
   name: "App",
   components: {
-    GenerateCards,
+    //GenerateCards,
   },
+  methods: {},
 };
 </script>
 

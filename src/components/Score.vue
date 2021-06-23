@@ -3,10 +3,16 @@
 <script>
 export default {
   computed: {
-    mounted() {
-      this.$root.$on("clicked", (deckOfCards) => {
-        this.deckOfCards = deckOfCards;
-      });
+    calculateScore(cards) {
+      while (
+        (score = cards.reduce(function(acc, card) {
+          return acc + parseInt(parseInt(card.value));
+        }, 0)) > 21 &&
+        (ace = checkForCardOf11Score(cards))
+      ) {
+        ace.value = 1;
+      }
+      return score;
     },
   },
   data() {
