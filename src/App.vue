@@ -4,18 +4,20 @@
     <h1>Blackjack</h1>
     <!-- <GenerateCards /> -->
     <button @click="$store.commit('generateDeckOfCards')">
-      Kaarten
+      Genereer kaarten
     </button>
+    <br /><br />
+    <DealCard />
   </div>
 </template>
 
 <script>
-//import GenerateCards from "./components/GenerateCards.vue";
+import DealCard from "./components/DealCard.vue";
 
 export default {
   name: "App",
   components: {
-    //GenerateCards,
+    DealCard,
   },
   methods: {},
 };

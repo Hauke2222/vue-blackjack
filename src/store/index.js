@@ -7,8 +7,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     deckOfCards: [],
-    cardsPlayer: [],
-    cardsDealer: [],
     cardRank: [
       { rank: "2", value: 2 },
       { rank: "3", value: 3 },
@@ -42,26 +40,12 @@ export default new Vuex.Store({
       }
       console.log(state.deckOfCards);
     },
-
-    hit(state) {
-      state.cardsPlayer.push(state.dealCard());
-      if (state.cardsDealer < 17) {
-        state.cardsDealer.push(state.dealCard());
-      }
-    },
-
-    dealCard(state) {
-      let randomNumberInDeck = Math.floor(
-        Math.random() * state.deckOfCards.length
-      );
-      let randomCard = JSON.parse(
-        JSON.stringify(state.deckOfCards[randomNumberInDeck])
-      );
-      state.deckOfCards.splice(randomNumberInDeck, 1);
-      return randomCard;
-    },
   },
   actions: {},
   modules: {},
-  getters: {},
+  getters: {
+    deckOfCards: (state) => {
+      return state.deckOfCards;
+    },
+  },
 });
