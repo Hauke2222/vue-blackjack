@@ -7,6 +7,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     deckOfCards: [],
+    cardsPlayer: [],
+    cardsDealer: [],
     cardRank: [
       { rank: "2", value: 2 },
       { rank: "3", value: 3 },
@@ -40,9 +42,28 @@ export default new Vuex.Store({
       }
       console.log(state.deckOfCards);
     },
+    ADD_CARD_TO_DECK(state, payload) {
+      if (payload.player == "player") {
+        state.cardsPlayer.push(payload.card);
+      } else {
+        state.cardsDealer.push(payload.card);
+      }
+    },
+    DELETE_CARD_FROM_DECK(state, payload) {
+      state.deckOfCards.splice(
+        state.deckOfCards[payload.randomNumberInDeck],
+        1
+      );
+    },
   },
-  actions: {},
-  modules: {},
+  actions: {
+    addCardToDeck({ commit }, payload) {
+      commit("ADD_CARD_TO_DECK", payload);
+    },
+    deleteCardFromDeck({ commit }, payload) {
+      commit("DELETE_CARD_FROM_DECK", payload);
+    },
+  },
   getters: {
     deckOfCards: (state) => {
       return state.deckOfCards;

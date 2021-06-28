@@ -9,14 +9,20 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["deckOfCards", ""]),
+    ...mapState(["deckOfCards", "cardsPlayer", "cardsDealer"]),
   },
   methods: {
     hit() {
-      console.log("qwerqwre" + this.$store.getters.deckOfCards);
-      this.cardsPlayer.push(this.dealCard);
+      this.$store.dispatch("addCardToDeck", {
+        player: "player",
+        card: this.dealCard(),
+      });
+
       if (this.cardsDealer < 17) {
-        this.cardsDealer.push(this.dealCard);
+        this.$store.dispatch("addCardToDeck", {
+          player: "dealer",
+          card: this.dealCard(),
+        });
       }
     },
 
@@ -24,20 +30,14 @@ export default {
       let randomNumberInDeck = Math.floor(
         Math.random() * this.deckOfCards.length
       );
-      console.log(randomNumberInDeck);
       let randomCard = this.deckOfCards[randomNumberInDeck];
-      this.deckOfCards.splice(randomNumberInDeck, 1);
-      console.log(randomCard);
+      this.$store.dispatch("deleteCardFromDeck", randomNumberInDeck);
       return randomCard;
     },
   },
   mounted() {},
   data() {
-    return {
-      deckOfCards: [],
-      cardsPlayer: [],
-      cardsDealer: [],
-    };
+    return {};
   },
 };
 </script>
