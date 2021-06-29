@@ -3,7 +3,7 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <h1>Blackjack</h1>
     <!-- <GenerateCards /> -->
-    <button @click="$store.commit('generateDeckOfCards')">
+    <button @click="$store.dispatch('generateDeckOfCards')">
       Genereer kaarten
     </button>
     <br /><br />

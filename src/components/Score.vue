@@ -1,8 +1,12 @@
 <template> </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   computed: {
+    ...mapState(["deckOfCards", "cardsPlayer", "cardsDealer"]),
+    
     calculateScore(cards) {
       while (
         (score = cards.reduce(function(acc, card) {
@@ -17,9 +21,6 @@ export default {
   },
   data() {
     return {
-      deckOfCards: [],
-      cardsPlayer: [],
-      cardsDealer: [],
     };
   },
 };

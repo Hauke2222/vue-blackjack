@@ -9,6 +9,8 @@ export default new Vuex.Store({
     deckOfCards: [],
     cardsPlayer: [],
     cardsDealer: [],
+    scorePlayer: '',
+    scoreDealer: '',
     cardRank: [
       { rank: "2", value: 2 },
       { rank: "3", value: 3 },
@@ -27,7 +29,7 @@ export default new Vuex.Store({
     cardSuit: ["Clubs", "Diamonds", "Hearts", "Spades"],
   },
   mutations: {
-    generateDeckOfCards(state) {
+    GENERATE_DECK_OF_CARDS(state) {
       state.deckOfCards = [];
       for (let i = 0; i < state.cardSuit.length; i++) {
         for (let j = 0; j < state.cardRank.length; j++) {
@@ -40,7 +42,6 @@ export default new Vuex.Store({
           );
         }
       }
-      console.log(state.deckOfCards);
     },
     ADD_CARD_TO_DECK(state, payload) {
       if (payload.player == "player") {
@@ -63,6 +64,9 @@ export default new Vuex.Store({
     deleteCardFromDeck({ commit }, payload) {
       commit("DELETE_CARD_FROM_DECK", payload);
     },
+    generateDeckOfCards({commit}) {
+      commit("GENERATE_DECK_OF_CARDS");
+    }
   },
   getters: {
     deckOfCards: (state) => {
