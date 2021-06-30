@@ -9,8 +9,8 @@ export default new Vuex.Store({
     deckOfCards: [],
     cardsPlayer: [],
     cardsDealer: [],
-    scorePlayer: '',
-    scoreDealer: '',
+    scorePlayer: "",
+    scoreDealer: "",
     cardRank: [
       { rank: "2", value: 2 },
       { rank: "3", value: 3 },
@@ -43,7 +43,7 @@ export default new Vuex.Store({
         }
       }
     },
-    ADD_CARD_TO_DECK(state, payload) {
+    ADD_CARD_TO_HAND(state, payload) {
       if (payload.player == "player") {
         state.cardsPlayer.push(payload.card);
       } else {
@@ -56,21 +56,49 @@ export default new Vuex.Store({
         1
       );
     },
+    CALCULATE_SCORE_DEALER(state) {
+      state.scoreDealer = state.cardsDealer.reduce(
+        (acc, card) => acc + card.value,
+        0
+      );
+    },
+    CALCULATE_SCORE_PLAYER(state) {
+      state.scorePlayer = state.cardsPlayer.reduce(
+        (acc, card) => acc + card.value,
+        0
+      );
+    },
   },
   actions: {
     addCardToDeck({ commit }, payload) {
-      commit("ADD_CARD_TO_DECK", payload);
+      commit("ADD_CARD_TO_HAND", payload);
     },
     deleteCardFromDeck({ commit }, payload) {
       commit("DELETE_CARD_FROM_DECK", payload);
     },
-    generateDeckOfCards({commit}) {
+    generateDeckOfCards({ commit }) {
       commit("GENERATE_DECK_OF_CARDS");
-    }
+    },
+    calculateScore({ commit }) {
+      commit("CALCULATE_SCORE_DEALER");
+      commit("CALCULATE_SCORE_PLAYER");
+    },
   },
   getters: {
     deckOfCards: (state) => {
       return state.deckOfCards;
+    },
+    scoreDealer: (state) => {
+      return state.scoreDealer;
+    },
+    scorePlayer: (state) => {
+      return state.scorePlayer;
+    },
+    cardsDealer: (state) => {
+      return state.cardsDealer;
+    },
+    cardsPlayer: (state) => {
+      return state.cardsPlayer;
     },
   },
 });

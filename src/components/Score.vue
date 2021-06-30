@@ -1,27 +1,28 @@
-<template> </template>
+<template>
+  <div>
+    <button @click="$store.dispatch('calculateScore')">
+      Bereken score
+    </button>
+    <div>Score dealer: {{ $store.getters.scoreDealer }}</div>
+    <div>Score player: {{ $store.getters.scorePlayer }}</div>
+  </div>
+</template>
 
 <script>
 import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["deckOfCards", "cardsPlayer", "cardsDealer"]),
-    
-    calculateScore(cards) {
-      while (
-        (score = cards.reduce(function(acc, card) {
-          return acc + parseInt(parseInt(card.value));
-        }, 0)) > 21 &&
-        (ace = checkForCardOf11Score(cards))
-      ) {
-        ace.value = 1;
-      }
-      return score;
-    },
+    ...mapState([
+      "deckOfCards",
+      "cardsPlayer",
+      "cardsDealer",
+      "scorePlayer",
+      "scoreDealer",
+    ]),
   },
   data() {
-    return {
-    };
+    return {};
   },
 };
 </script>

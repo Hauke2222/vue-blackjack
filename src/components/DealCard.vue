@@ -1,6 +1,8 @@
 <template>
   <div>
     <button @click="hit()">Trek een kaart</button>
+    <br />
+    <button @click="pass()">Pass</button>
   </div>
 </template>
 
@@ -9,7 +11,7 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["deckOfCards", "cardsPlayer", "cardsDealer"]),
+    ...mapState(["deckOfCards", "cardsPlayer", "cardsDealer", "scoreDealer"]),
   },
   methods: {
     hit() {
@@ -18,7 +20,16 @@ export default {
         card: this.dealCard(),
       });
 
-      if (this.cardsDealer < 17) {
+      if (this.$store.getters.scoreDealer < 17) {
+        this.$store.dispatch("addCardToDeck", {
+          player: "dealer",
+          card: this.dealCard(),
+        });
+      }
+    },
+
+    pass() {
+      while (this.$store.getters.scoreDealer < 17) {
         this.$store.dispatch("addCardToDeck", {
           player: "dealer",
           card: this.dealCard(),

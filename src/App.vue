@@ -2,22 +2,20 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <h1>Blackjack</h1>
-    <!-- <GenerateCards /> -->
-    <button @click="$store.dispatch('generateDeckOfCards')">
-      Genereer kaarten
-    </button>
-    <br /><br />
     <DealCard />
+    <Score />
   </div>
 </template>
 
 <script>
 import DealCard from "./components/DealCard.vue";
+import Score from "./components/Score.vue";
 
 export default {
   name: "App",
   components: {
     DealCard,
+    Score,
   },
   methods: {},
 };

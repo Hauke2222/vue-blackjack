@@ -6,5 +6,8 @@ Vue.config.productionTip = false;
 
 new Vue({
   store,
+  created() {
+    this.$store.dispatch("generateDeckOfCards");
+  },
   render: (h) => h(App),
 }).$mount("#app");
