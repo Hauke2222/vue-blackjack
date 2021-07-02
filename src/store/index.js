@@ -26,7 +26,12 @@ export default new Vuex.Store({
       { rank: "Queen", value: 10 },
       { rank: "King", value: 10 },
     ],
-    cardSuit: ["Clubs", "Diamonds", "Hearts", "Spades"],
+    cardSuit: [
+      { suit: "Clubs", unicode: "\u2663" },
+      { suit: "Diamonds", unicode: "\u2666" },
+      { suit: "Hearts", unicode: "\u2665" },
+      { suit: "Spades", unicode: "\u2660" },
+    ],
   },
   mutations: {
     GENERATE_DECK_OF_CARDS(state) {
@@ -35,7 +40,8 @@ export default new Vuex.Store({
         for (let j = 0; j < state.cardRank.length; j++) {
           state.deckOfCards.push(
             new Card(
-              state.cardSuit[i],
+              state.cardSuit[i].suit,
+              state.cardSuit[i].unicode,
               state.cardRank[j].rank,
               state.cardRank[j].value
             )
@@ -56,18 +62,6 @@ export default new Vuex.Store({
         1
       );
     },
-    CALCULATE_SCORE_DEALER(state) {
-      state.scoreDealer = state.cardsDealer.reduce(
-        (acc, card) => acc + card.value,
-        0
-      );
-    },
-    CALCULATE_SCORE_PLAYER(state) {
-      state.scorePlayer = state.cardsPlayer.reduce(
-        (acc, card) => acc + card.value,
-        0
-      );
-    },
   },
   actions: {
     addCardToDeck({ commit }, payload) {
@@ -79,20 +73,22 @@ export default new Vuex.Store({
     generateDeckOfCards({ commit }) {
       commit("GENERATE_DECK_OF_CARDS");
     },
-    calculateScore({ commit }) {
-      commit("CALCULATE_SCORE_DEALER");
-      commit("CALCULATE_SCORE_PLAYER");
-    },
   },
   getters: {
     deckOfCards: (state) => {
       return state.deckOfCards;
     },
     scoreDealer: (state) => {
-      return state.scoreDealer;
+      return (state.scoreDealer = state.cardsDealer.reduce(
+        (acc, card) => acc + card.value,
+        0
+      ));
     },
     scorePlayer: (state) => {
-      return state.scorePlayer;
+      return (state.scorePlayer = state.cardsPlayer.reduce(
+        (acc, card) => acc + card.value,
+        0
+      ));
     },
     cardsDealer: (state) => {
       return state.cardsDealer;
