@@ -1,9 +1,23 @@
 <template>
   <div>
-    <div>Cards dealer: {{ $store.getters.cardsDealer }}</div>
-    <div>Cards player: {{ $store.getters.cardsPlayer }}</div>
-    <div>Score dealer: {{ $store.getters.scoreDealer }}</div>
-    <div>Score player: {{ $store.getters.scorePlayer }}</div>
+    <div>
+      <p>Cards dealer:</p>
+      <ul id="horizontal-list">
+        <li v-for="(card, index) in cardsDealer" :key="index">
+          {{ card.suit + card.unicode + card.rank }}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <p>Cards player:</p>
+      <ul id="horizontal-list">
+        <li v-for="(card, index) in cardsPlayer" :key="index">
+          {{ card.suit + card.unicode + card.rank }}
+        </li>
+      </ul>
+    </div>
+    <div>Score dealer: {{ scoreDealer }}</div>
+    <div>Score player: {{ scorePlayer }}</div>
   </div>
 </template>
 
@@ -26,4 +40,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+ul#horizontal-list li {
+  display: inline;
+}
+</style>

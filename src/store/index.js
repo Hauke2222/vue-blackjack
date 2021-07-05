@@ -11,6 +11,7 @@ export default new Vuex.Store({
     cardsDealer: [],
     scorePlayer: "",
     scoreDealer: "",
+    winner: "",
     cardRank: [
       { rank: "2", value: 2 },
       { rank: "3", value: 3 },
@@ -41,8 +42,8 @@ export default new Vuex.Store({
           state.deckOfCards.push(
             new Card(
               state.cardSuit[i].suit,
-              state.cardSuit[i].unicode,
               state.cardRank[j].rank,
+              state.cardSuit[i].unicode,
               state.cardRank[j].value
             )
           );
@@ -62,6 +63,7 @@ export default new Vuex.Store({
         1
       );
     },
+    CHECK_FOR_WIN(state) {},
   },
   actions: {
     addCardToDeck({ commit }, payload) {
@@ -95,6 +97,9 @@ export default new Vuex.Store({
     },
     cardsPlayer: (state) => {
       return state.cardsPlayer;
+    },
+    winner: (state) => {
+      return state.winner;
     },
   },
 });
