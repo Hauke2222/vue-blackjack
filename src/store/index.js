@@ -13,25 +13,25 @@ export default new Vuex.Store({
     scoreDealer: "",
     winner: "",
     cardRank: [
-      { rank: "2", value: 2 },
-      { rank: "3", value: 3 },
-      { rank: "4", value: 4 },
-      { rank: "5", value: 5 },
-      { rank: "6", value: 6 },
-      { rank: "7", value: 7 },
-      { rank: "8", value: 8 },
-      { rank: "9", value: 9 },
-      { rank: "10", value: 10 },
-      { rank: "Ace", value: 11 },
-      { rank: "Jack", value: 10 },
-      { rank: "Queen", value: 10 },
-      { rank: "King", value: 10 },
+      { rank: "Ace", value: 11, unicodePart: "1" },
+      { rank: "2", value: 2, unicodePart: "2" },
+      { rank: "3", value: 3, unicodePart: "3" },
+      { rank: "4", value: 4, unicodePart: "4" },
+      { rank: "5", value: 5, unicodePart: "5" },
+      { rank: "6", value: 6, unicodePart: "6" },
+      { rank: "7", value: 7, unicodePart: "7" },
+      { rank: "8", value: 8, unicodePart: "8" },
+      { rank: "9", value: 9, unicodePart: "9" },
+      { rank: "10", value: 10, unicodePart: "A" },
+      { rank: "Jack", value: 10, unicodePart: "B" },
+      { rank: "Queen", value: 10, unicodePart: "D" },
+      { rank: "King", value: 10, unicodePart: "E" },
     ],
     cardSuit: [
-      { suit: "Clubs", unicode: "\u2663" },
-      { suit: "Diamonds", unicode: "\u2666" },
-      { suit: "Hearts", unicode: "\u2665" },
-      { suit: "Spades", unicode: "\u2660" },
+      { suit: "Clubs", unicode: "1F0D" },
+      { suit: "Diamonds", unicode: "1F0C" },
+      { suit: "Hearts", unicode: "1F0B" },
+      { suit: "Spades", unicode: "1F0A" },
     ],
   },
   mutations: {
@@ -43,7 +43,10 @@ export default new Vuex.Store({
             new Card(
               state.cardSuit[i].suit,
               state.cardRank[j].rank,
-              state.cardSuit[i].unicode,
+              //state.cardSuit[i].unicode + state.cardRank[j].unicodePart,
+              String.fromCharCode(
+                "0x" + state.cardSuit[i].unicode + state.cardRank[j].unicodePart
+              ),
               state.cardRank[j].value
             )
           );
@@ -58,12 +61,9 @@ export default new Vuex.Store({
       }
     },
     DELETE_CARD_FROM_DECK(state, payload) {
-      state.deckOfCards.splice(
-        state.deckOfCards[payload.randomNumberInDeck],
-        1
-      );
+      state.deckOfCards.splice([payload], 1);
     },
-    CHECK_FOR_WIN(state) {},
+    // CHECK_FOR_WIN(state) {},
   },
   actions: {
     addCardToDeck({ commit }, payload) {
