@@ -2,6 +2,9 @@
   <div>
     <div>
       <p>Cards dealer:</p>
+      <p>
+        <span class="bigFontSize" v-html="unicode"></span>
+      </p>
       <ul id="horizontal-list">
         <li v-for="(card, index) in cardsDealer" :key="index">
           {{ card.suit + card.unicode + card.rank }}
@@ -35,7 +38,9 @@ export default {
     ]),
   },
   data() {
-    return {};
+    return {
+      unicode: "&#x1f0a0",
+    };
   },
 };
 </script>
@@ -43,5 +48,9 @@ export default {
 <style>
 ul#horizontal-list li {
   display: inline;
+}
+
+.bigFontSize {
+  font-size: 100pt;
 }
 </style>
