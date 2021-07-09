@@ -1,8 +1,6 @@
 <template>
   <div>
     <div>
-      <p>Cards dealer:</p>
-
       <ul id="horizontal-list">
         <li
           class="bigFontSize"
@@ -13,11 +11,13 @@
       </ul>
     </div>
     <div>
-      <p>Cards player:</p>
       <ul id="horizontal-list">
-        <li v-for="(card, index) in cardsPlayer" :key="index">
-          {{ card.unicode }}
-        </li>
+        <li
+          class="bigFontSize"
+          v-for="(card, index) in cardsPlayer"
+          :key="index"
+          v-html="card.unicode"
+        ></li>
       </ul>
     </div>
     <div>Score dealer: {{ scoreDealer }}</div>
@@ -26,22 +26,15 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState([
-      "deckOfCards",
-      "cardsPlayer",
-      "cardsDealer",
-      "scorePlayer",
-      "scoreDealer",
-    ]),
+    ...mapGetters(["scoreDealer", "scorePlayer"]),
+    ...mapState(["deckOfCards", "cardsPlayer", "cardsDealer"]),
   },
   data() {
-    return {
-      unicode: "&#x1F0C9",
-    };
+    return {};
   },
 };
 </script>

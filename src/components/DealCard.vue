@@ -46,6 +46,16 @@ export default {
       return randomCard;
     },
   },
+  created() {
+    /*     this.$store.dispatch("addCardToDeck", {
+      player: "player",
+      card: this.dealCard(),
+    });
+    this.$store.dispatch("addCardToDeck", {
+      player: "dealer",
+      card: this.dealCard(),
+    }); */
+  },
   mounted() {},
   data() {
     return {};

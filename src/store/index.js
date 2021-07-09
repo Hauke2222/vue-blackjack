@@ -9,8 +9,6 @@ export default new Vuex.Store({
     deckOfCards: [],
     cardsPlayer: [],
     cardsDealer: [],
-    scorePlayer: "",
-    scoreDealer: "",
     winner: "",
     cardRank: [
       { rank: "Ace", value: 11, unicodePart: "1" },
@@ -44,10 +42,6 @@ export default new Vuex.Store({
               state.cardSuit[i].suit,
               state.cardRank[j].rank,
               "&#x" + state.cardSuit[i].unicode + state.cardRank[j].unicodePart,
-              //state.cardSuit[i].unicode + state.cardRank[j].unicodePart,
-              //   String.fromCharCode(
-              //     "0x" + state.cardSuit[i].unicode + state.cardRank[j].unicodePart
-              //   ),
               state.cardRank[j].value
             )
           );
@@ -65,6 +59,7 @@ export default new Vuex.Store({
       state.deckOfCards.splice([payload], 1);
     },
     // CHECK_FOR_WIN(state) {},
+    // GENERATE_STARTPOINT_GAME(state) {},
   },
   actions: {
     addCardToDeck({ commit }, payload) {
@@ -76,22 +71,19 @@ export default new Vuex.Store({
     generateDeckOfCards({ commit }) {
       commit("GENERATE_DECK_OF_CARDS");
     },
+    // generateGameStartPoint({ commit }) {
+    //   commit("GENERATE_STARTPOINT_GAME");
+    // },
   },
   getters: {
     deckOfCards: (state) => {
       return state.deckOfCards;
     },
     scoreDealer: (state) => {
-      return (state.scoreDealer = state.cardsDealer.reduce(
-        (acc, card) => acc + card.value,
-        0
-      ));
+      return state.cardsDealer.reduce((acc, card) => acc + card.value, 0);
     },
     scorePlayer: (state) => {
-      return (state.scorePlayer = state.cardsPlayer.reduce(
-        (acc, card) => acc + card.value,
-        0
-      ));
+      return state.cardsPlayer.reduce((acc, card) => acc + card.value, 0);
     },
     cardsDealer: (state) => {
       return state.cardsDealer;
