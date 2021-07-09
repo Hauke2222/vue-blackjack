@@ -43,10 +43,11 @@ export default new Vuex.Store({
             new Card(
               state.cardSuit[i].suit,
               state.cardRank[j].rank,
+              "&#x" + state.cardSuit[i].unicode + state.cardRank[j].unicodePart,
               //state.cardSuit[i].unicode + state.cardRank[j].unicodePart,
-              String.fromCharCode(
-                "0x" + state.cardSuit[i].unicode + state.cardRank[j].unicodePart
-              ),
+              //   String.fromCharCode(
+              //     "0x" + state.cardSuit[i].unicode + state.cardRank[j].unicodePart
+              //   ),
               state.cardRank[j].value
             )
           );

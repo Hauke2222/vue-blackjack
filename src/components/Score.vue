@@ -2,20 +2,21 @@
   <div>
     <div>
       <p>Cards dealer:</p>
-      <p>
-        <span class="bigFontSize" v-html="unicode"></span>
-      </p>
+
       <ul id="horizontal-list">
-        <li v-for="(card, index) in cardsDealer" :key="index">
-          {{ card.suit + card.unicode + card.rank }}
-        </li>
+        <li
+          class="bigFontSize"
+          v-for="(card, index) in cardsDealer"
+          :key="index"
+          v-html="card.unicode"
+        ></li>
       </ul>
     </div>
     <div>
       <p>Cards player:</p>
       <ul id="horizontal-list">
         <li v-for="(card, index) in cardsPlayer" :key="index">
-          {{ card.suit + card.unicode + card.rank }}
+          {{ card.unicode }}
         </li>
       </ul>
     </div>
@@ -39,7 +40,7 @@ export default {
   },
   data() {
     return {
-      unicode: "&#x1f0a0",
+      unicode: "&#x1F0C9",
     };
   },
 };
