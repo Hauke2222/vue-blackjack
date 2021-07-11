@@ -47,14 +47,8 @@ export default {
     },
   },
   created() {
-    /*     this.$store.dispatch("addCardToDeck", {
-      player: "player",
-      card: this.dealCard(),
-    });
-    this.$store.dispatch("addCardToDeck", {
-      player: "dealer",
-      card: this.dealCard(),
-    }); */
+    this.hit();
+    this.hit();
   },
   mounted() {},
   data() {

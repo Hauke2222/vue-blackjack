@@ -59,7 +59,6 @@ export default new Vuex.Store({
       state.deckOfCards.splice([payload], 1);
     },
     // CHECK_FOR_WIN(state) {},
-    // GENERATE_STARTPOINT_GAME(state) {},
   },
   actions: {
     addCardToDeck({ commit }, payload) {
@@ -71,9 +70,6 @@ export default new Vuex.Store({
     generateDeckOfCards({ commit }) {
       commit("GENERATE_DECK_OF_CARDS");
     },
-    // generateGameStartPoint({ commit }) {
-    //   commit("GENERATE_STARTPOINT_GAME");
-    // },
   },
   getters: {
     deckOfCards: (state) => {
