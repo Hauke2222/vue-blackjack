@@ -3,11 +3,13 @@
     <h1>Blackjack</h1>
     <Score />
     <DealCard />
+    <Outcome />
   </div>
 </template>
 
 <script>
 import DealCard from "./components/DealCard.vue";
+import Outcome from "./components/Outcome.vue";
 import Score from "./components/Score.vue";
 
 export default {
@@ -15,6 +17,7 @@ export default {
   components: {
     DealCard,
     Score,
+    Outcome,
   },
   methods: {},
 };

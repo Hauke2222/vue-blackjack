@@ -9,7 +9,6 @@ export default new Vuex.Store({
     deckOfCards: [],
     cardsPlayer: [],
     cardsDealer: [],
-    winner: "",
     cardRank: [
       { rank: "Ace", value: 11, unicodePart: "1" },
       { rank: "2", value: 2, unicodePart: "2" },
@@ -58,7 +57,6 @@ export default new Vuex.Store({
     DELETE_CARD_FROM_DECK(state, payload) {
       state.deckOfCards.splice([payload], 1);
     },
-    // CHECK_FOR_WIN(state) {},
   },
   actions: {
     addCardToDeck({ commit }, payload) {
@@ -87,8 +85,18 @@ export default new Vuex.Store({
     cardsPlayer: (state) => {
       return state.cardsPlayer;
     },
-    winner: (state) => {
-      return state.winner;
+    winner: (_, getters) => {
+      if (getters.scoreDealer === 21) {
+        return "Dealer";
+      } else if (getters.scorePlayer === 21) {
+        return "Player";
+      } else if (getters.scorePlayer > 21) {
+        return "Dealer";
+      } else if (getters.scoreDealer > 21) {
+        return "Player";
+      } else {
+        return "test";
+      }
     },
   },
 });

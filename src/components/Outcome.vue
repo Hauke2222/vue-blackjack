@@ -1,8 +1,15 @@
-<template> </template>
+<template>
+  <div>Winner: {{ winner }}</div>
+</template>
 
 <script>
-import { mapState } from "vuex";
-export default {};
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters(["winner"]),
+  },
+};
 </script>
 
 <style></style>
