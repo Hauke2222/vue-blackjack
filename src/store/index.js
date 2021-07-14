@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Card from "../card.js";
+import Functions from "../functions";
 
 Vue.use(Vuex);
 
@@ -74,10 +75,10 @@ export default new Vuex.Store({
       return state.deckOfCards;
     },
     scoreDealer: (state) => {
-      return state.cardsDealer.reduce((acc, card) => acc + card.value, 0);
+      return calculateScore(state.cardsDealer);
     },
     scorePlayer: (state) => {
-      return state.cardsPlayer.reduce((acc, card) => acc + card.value, 0);
+      return calculateScore(state.cardsPlayer);
     },
     cardsDealer: (state) => {
       return state.cardsDealer;
@@ -86,16 +87,18 @@ export default new Vuex.Store({
       return state.cardsPlayer;
     },
     winner: (_, getters) => {
-      if (getters.scoreDealer === 21) {
-        return "Dealer";
+      if (getters.scoreDealer === 21 && getters.scorePlayer === 21) {
+        return "Draw";
       } else if (getters.scorePlayer === 21) {
         return "Player";
+      } else if (getters.scoreDealer === 21) {
+        return "Dealer";
       } else if (getters.scorePlayer > 21) {
         return "Dealer";
       } else if (getters.scoreDealer > 21) {
         return "Player";
       } else {
-        return "test";
+        return "";
       }
     },
   },

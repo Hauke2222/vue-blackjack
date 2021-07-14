@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button @click="hit()">Trek een kaart</button>
+    <button @click="hit()">Hit</button>
     <br />
     <button @click="pass()">Pass</button>
   </div>
@@ -19,13 +19,6 @@ export default {
         player: "player",
         card: this.dealCard(),
       });
-
-      if (this.$store.getters.scoreDealer < 17) {
-        this.$store.dispatch("addCardToDeck", {
-          player: "dealer",
-          card: this.dealCard(),
-        });
-      }
     },
 
     pass() {
@@ -46,10 +39,7 @@ export default {
       return randomCard;
     },
   },
-  created() {
-    this.hit();
-    this.hit();
-  },
+  created() {},
   mounted() {},
   data() {
     return {};
