@@ -23,6 +23,9 @@ export default {
 
     pass() {
       while (this.$store.getters.scoreDealer < 17) {
+        console.log(
+          "score dealer in pass functie: " + this.$store.getters.scoreDealer
+        );
         this.$store.dispatch("addCardToDeck", {
           player: "dealer",
           card: this.dealCard(),

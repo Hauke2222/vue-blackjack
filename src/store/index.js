@@ -75,6 +75,7 @@ export default new Vuex.Store({
       return state.deckOfCards;
     },
     scoreDealer: (state) => {
+      console.log("inhoud hand dealer: " + state.cardsDealer);
       return Functions.calculateScore(state.cardsDealer);
     },
     scorePlayer: (state) => {
