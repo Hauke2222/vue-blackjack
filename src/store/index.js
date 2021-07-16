@@ -75,10 +75,10 @@ export default new Vuex.Store({
       return state.deckOfCards;
     },
     scoreDealer: (state) => {
-      return calculateScore(state.cardsDealer);
+      return Functions.calculateScore(state.cardsDealer);
     },
     scorePlayer: (state) => {
-      return calculateScore(state.cardsPlayer);
+      return Functions.calculateScore(state.cardsPlayer);
     },
     cardsDealer: (state) => {
       return state.cardsDealer;
