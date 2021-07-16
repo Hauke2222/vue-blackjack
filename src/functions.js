@@ -9,15 +9,15 @@ export default class Functions {
   }
 
   static calculateScore(cards) {
-    let score = 0;
-    let ace;
+    let score;
+
     while (
       (score = cards.reduce((acc, card) => acc + card.value, 0)) > 21 &&
       Functions.checkForCardOf11Score(cards)
     ) {
-      ace = Functions.checkForCardOf11Score(cards);
-      ace.value = 1;
+      Functions.checkForCardOf11Score(cards).value = 1;
     }
+
     return score;
   }
 }
