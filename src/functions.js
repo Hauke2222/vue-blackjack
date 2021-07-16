@@ -10,19 +10,15 @@ export default class Functions {
   }
 
   static calculateScore(cards) {
-    // console.log(cards);
-    let score = 0;
-    let ace;
+    let score;
+
     while (
-      cards.reduce((acc, card) => acc + card.value, 0) > 21 &&
+      (score = cards.reduce((acc, card) => acc + card.value, 0)) > 21 &&
       Functions.checkForCardOf11Score(cards)
     ) {
-      console.log("bezig met asen verlagen");
-      ace = Functions.checkForCardOf11Score(cards);
-      ace.value = 1;
+      Functions.checkForCardOf11Score(cards).value = 1;
     }
 
-    console.log("calculateScore: " + score);
     return score;
   }
 }
