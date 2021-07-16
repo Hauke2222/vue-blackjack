@@ -1,8 +1,12 @@
 <template>
   <div>
-    <button @click="hit()">Hit</button>
+    <button v-bind:disabled="hitButtonDisabled" @click="hit()">
+      Hit
+    </button>
     <br />
-    <button @click="pass()">Pass</button>
+    <button v-bind:disabled="passButtonDisabled" @click="pass()">
+      Pass
+    </button>
   </div>
 </template>
 
@@ -11,7 +15,25 @@ import { mapState } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["deckOfCards", "cardsPlayer", "cardsDealer", "scoreDealer"]),
+    ...mapState([
+      "deckOfCards",
+      "cardsPlayer",
+      "cardsDealer",
+      "scoreDealer",
+      "scorePlayer",
+    ]),
+    hitButtonDisabled() {
+      if (this.$store.getters.scorePlayer >= 21) {
+        return true;
+      }
+      return false;
+    },
+    passButtonDisabled() {
+      if (this.$store.getters.scoreDealer >= 17) {
+        return true;
+      }
+      return false;
+    },
   },
   methods: {
     hit() {
@@ -23,9 +45,6 @@ export default {
 
     pass() {
       while (this.$store.getters.scoreDealer < 17) {
-        console.log(
-          "score dealer in pass functie: " + this.$store.getters.scoreDealer
-        );
         this.$store.dispatch("addCardToDeck", {
           player: "dealer",
           card: this.dealCard(),

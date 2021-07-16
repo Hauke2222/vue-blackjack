@@ -10,6 +10,7 @@ export default new Vuex.Store({
     deckOfCards: [],
     cardsPlayer: [],
     cardsDealer: [],
+    pass: false,
     cardRank: [
       { rank: "Ace", value: 11, unicodePart: "1" },
       { rank: "2", value: 2, unicodePart: "2" },
@@ -75,7 +76,6 @@ export default new Vuex.Store({
       return state.deckOfCards;
     },
     scoreDealer: (state) => {
-      console.log("inhoud hand dealer: " + state.cardsDealer);
       return Functions.calculateScore(state.cardsDealer);
     },
     scorePlayer: (state) => {
@@ -98,6 +98,10 @@ export default new Vuex.Store({
         return "Dealer";
       } else if (getters.scoreDealer > 21) {
         return "Player";
+      } else if (state.pass && getters.scorePlayer > getters.scoreDealer) {
+        return "Player";
+      } else if (state.pass && getters.scoreDealer > getters.scorePlayer) {
+        return "Dealer";
       } else {
         return "";
       }
