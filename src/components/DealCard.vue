@@ -1,10 +1,10 @@
 <template>
   <div>
-    <button v-bind:disabled="hitButtonDisabled" @click="hit()">
+    <button v-bind:disabled="hitButtonDisabled" @click="$store.dispatch('hit')">
       Hit
     </button>
     <br />
-    <button v-bind:disabled="passButtonDisabled" @click="pass()">
+    <button v-bind:disabled="passButtonDisabled" @click="$store.dispatch('pass')">
       Pass
     </button>
   </div>
@@ -35,32 +35,7 @@ export default {
       return false;
     },
   },
-  methods: {
-    hit() {
-      this.$store.dispatch("addCardToDeck", {
-        player: "player",
-        card: this.dealCard(),
-      });
-    },
-
-    pass() {
-      while (this.$store.getters.scoreDealer < 17) {
-        this.$store.dispatch("addCardToDeck", {
-          player: "dealer",
-          card: this.dealCard(),
-        });
-      }
-    },
-
-    dealCard() {
-      let randomNumberInDeck = Math.floor(
-        Math.random() * this.deckOfCards.length
-      );
-      let randomCard = this.deckOfCards[randomNumberInDeck];
-      this.$store.dispatch("deleteCardFromDeck", randomNumberInDeck);
-      return randomCard;
-    },
-  },
+  methods: {},
   created() {},
   mounted() {},
   data() {

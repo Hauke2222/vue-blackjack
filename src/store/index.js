@@ -70,6 +70,28 @@ export default new Vuex.Store({
     generateDeckOfCards({ commit }) {
       commit("GENERATE_DECK_OF_CARDS");
     },
+    dealCard({state, dispatch}) {
+      let randomNumberInDeck = Math.floor(
+        Math.random() * state.deckOfCards.length
+      );
+      let randomCard = state.deckOfCards[randomNumberInDeck];
+      dispatch("deleteCardFromDeck", randomNumberInDeck);
+      return randomCard;
+    },
+    hit({dispatch}) {
+      dispatch("addCardToDeck", {
+        player: "player",
+        card: dispatch("dealCard"),
+      });
+    },
+    pass({dispatch}) {
+      while (this.$store.getters.scoreDealer < 17) {
+        dispatch("addCardToDeck", {
+          player: "dealer",
+          card: dispatch("dealCard"),
+        });
+      }
+    },
   },
   getters: {
     deckOfCards: (state) => {
@@ -87,7 +109,7 @@ export default new Vuex.Store({
     cardsPlayer: (state) => {
       return state.cardsPlayer;
     },
-    winner: (_, getters) => {
+    winner: (state, getters) => {
       if (getters.scoreDealer === 21 && getters.scorePlayer === 21) {
         return "Draw";
       } else if (getters.scorePlayer === 21) {
