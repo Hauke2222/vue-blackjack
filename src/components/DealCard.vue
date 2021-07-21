@@ -4,24 +4,18 @@
       Hit
     </button>
     <br />
-    <button v-bind:disabled="passButtonDisabled" @click="$store.dispatch('pass')">
+    <button
+      v-bind:disabled="passButtonDisabled"
+      @click="$store.dispatch('pass')"
+    >
       Pass
     </button>
   </div>
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
   computed: {
-    ...mapState([
-      "deckOfCards",
-      "cardsPlayer",
-      "cardsDealer",
-      "scoreDealer",
-      "scorePlayer",
-    ]),
     hitButtonDisabled() {
       if (this.$store.getters.scorePlayer >= 21) {
         return true;
@@ -34,12 +28,6 @@ export default {
       }
       return false;
     },
-  },
-  methods: {},
-  created() {},
-  mounted() {},
-  data() {
-    return {};
   },
 };
 </script>

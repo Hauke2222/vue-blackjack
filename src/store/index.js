@@ -61,35 +61,24 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    addCardToDeck({ commit }, payload) {
-      commit("ADD_CARD_TO_HAND", payload);
-    },
-    deleteCardFromDeck({ commit }, payload) {
-      commit("DELETE_CARD_FROM_DECK", payload);
-    },
     generateDeckOfCards({ commit }) {
       commit("GENERATE_DECK_OF_CARDS");
     },
-    dealCard({state, dispatch}) {
+    hit({ commit }) {
       let randomNumberInDeck = Math.floor(
-        Math.random() * state.deckOfCards.length
+        Math.random() * this.state.deckOfCards.length
       );
-      let randomCard = state.deckOfCards[randomNumberInDeck];
-      dispatch("deleteCardFromDeck", randomNumberInDeck);
-      return randomCard;
-    },
-    hit({dispatch}) {
-      dispatch("addCardToDeck", {
+      let randomCard = this.state.deckOfCards[randomNumberInDeck];
+
+      commit("DELETE_CARD_FROM_DECK", randomCard);
+      commit("ADD_CARD_TO_HAND", {
         player: "player",
-        card: dispatch("dealCard"),
+        card: randomCard,
       });
     },
-    pass({dispatch}) {
-      while (this.$store.getters.scoreDealer < 17) {
-        dispatch("addCardToDeck", {
-          player: "dealer",
-          card: dispatch("dealCard"),
-        });
+    pass({ dispatch }) {
+      while (this.state.getters.scoreDealer < 17) {
+        dispatch("hit");
       }
     },
   },
