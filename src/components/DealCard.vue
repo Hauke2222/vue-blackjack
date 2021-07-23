@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-bind:disabled="hitButtonDisabled" @click="$store.dispatch('hit')">
+    <button v-bind:disabled="hitButtonDisabled" @click="$store.dispatch('hit', 'player')">
       Hit
     </button>
     <br />
