@@ -1,13 +1,13 @@
 <template>
   <div>
-    <button v-bind:disabled="hitButtonDisabled" @click="$store.dispatch('hit', 'player')">
+    <button
+      v-bind:disabled="hitButtonDisabled"
+      @click="$store.dispatch('hit', 'player')"
+    >
       Hit
     </button>
     <br />
-    <button
-      v-bind:disabled="passButtonDisabled"
-      @click="$store.dispatch('pass')"
-    >
+    <button v-bind:disabled="passButtonDisabled" @click="pass()">
       Pass
     </button>
   </div>
@@ -27,6 +27,13 @@ export default {
         return true;
       }
       return false;
+    },
+  },
+  methods: {
+    pass() {
+      while (this.$store.getters.scoreDealer < 17) {
+        this.$store.dispatch("hit", "dealer");
+      }
     },
   },
 };

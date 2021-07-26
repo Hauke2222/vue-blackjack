@@ -64,8 +64,7 @@ export default new Vuex.Store({
     generateDeckOfCards({ commit }) {
       commit("GENERATE_DECK_OF_CARDS");
     },
-    hit({ commit }, {user}) {
-      console.log(user);
+    hit({ commit }, user) {
       let randomNumberInDeck = Math.floor(
         Math.random() * this.state.deckOfCards.length
       );
@@ -76,11 +75,6 @@ export default new Vuex.Store({
         player: user,
         card: randomCard,
       });
-    },
-    pass({ dispatch }) {
-      while (this.state.getters.scoreDealer < 17) {
-        dispatch("hit", 'dealer');
-      }
     },
   },
   getters: {
