@@ -8,6 +8,10 @@ new Vue({
   store,
   created() {
     this.$store.dispatch("generateDeckOfCards");
+    this.$store.dispatch("hit", "player");
+    this.$store.dispatch("hit", "player");
+    this.$store.dispatch("hit", "dealer");
+    this.$store.dispatch("hit", "dealer");
   },
   render: (h) => h(App),
 }).$mount("#app");
