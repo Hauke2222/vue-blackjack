@@ -23,7 +23,7 @@ export default {
       return false;
     },
     passButtonDisabled() {
-      if (this.$store.getters.scoreDealer >= 17) {
+      if (this.$store.getters.scoreDealer >= 17 && this.$store.getters.pass == true) {
         return true;
       }
       return false;
@@ -31,6 +31,7 @@ export default {
   },
   methods: {
     pass() {
+      this.$store.dispatch("pass")
       while (this.$store.getters.scoreDealer < 17) {
         this.$store.dispatch("hit", "dealer");
       }

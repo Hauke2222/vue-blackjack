@@ -59,6 +59,9 @@ export default new Vuex.Store({
     DELETE_CARD_FROM_DECK(state, payload) {
       state.deckOfCards.splice([payload], 1);
     },
+    SET_PASS_BOOLEAN_TRUE(state) {
+      state.pass = true;
+    },
   },
   actions: {
     generateDeckOfCards({ commit }) {
@@ -76,6 +79,17 @@ export default new Vuex.Store({
         card: randomCard,
       });
     },
+    pass({commit}) {
+      commit("SET_PASS_BOOLEAN_TRUE");
+    },
+    initGame({dispatch}) {
+      dispatch("generateDeckOfCards");
+      dispatch("hit", "player");
+      dispatch("hit", "dealer");
+      dispatch("hit", "player");
+      dispatch("hit", "dealer");
+
+    }
   },
   getters: {
     deckOfCards: (state) => {
@@ -92,6 +106,9 @@ export default new Vuex.Store({
     },
     cardsPlayer: (state) => {
       return state.cardsPlayer;
+    },
+    pass: (state) => {
+      return state.pass;
     },
     winner: (state, getters) => {
       if (getters.scoreDealer === 21 && getters.scorePlayer === 21) {
