@@ -1,5 +1,7 @@
 # vue-blackjack
 
+https://hauke2222.github.io/vue-blackjack/
+
 ## Project setup
 ```
 npm install
