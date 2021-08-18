@@ -11,7 +11,7 @@ export default new Vuex.Store({
     cardsPlayer: [],
     cardsDealer: [],
     pass: false,
-    cardRank: [
+    cardRank: [ // todo: cardRank en cardSuit in meervoud omdat het meerdere elementen (arrays) zijn
       { rank: "Ace", value: 11, unicodePart: "1" },
       { rank: "2", value: 2, unicodePart: "2" },
       { rank: "3", value: 3, unicodePart: "3" },
@@ -49,6 +49,9 @@ export default new Vuex.Store({
         }
       }
     },
+    // todo: gebruik argument destructuring om de payload om te zetten in losse variablen voor verkorte schrijfwijze:
+    // ADD_CARD_TO_HAND(state, { player, card }) {
+    // voor meer informatie zie: https://github.com/lukehoban/es6features#destructuring
     ADD_CARD_TO_HAND(state, payload) {
       if (payload.player == "player") {
         state.cardsPlayer.push(payload.card);
