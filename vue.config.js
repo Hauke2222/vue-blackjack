@@ -1,3 +1,3 @@
 module.exports = {
-    // publicPath: '/vue-blackjack/'
-}
+  publicPath: "/vue-blackjack/",
+};

@@ -11,7 +11,7 @@ export default new Vuex.Store({
     cardsPlayer: [],
     cardsDealer: [],
     pass: false,
-    cardRank: [ // todo: cardRank en cardSuit in meervoud omdat het meerdere elementen (arrays) zijn
+    cardRanks: [
       { rank: "Ace", value: 11, unicodePart: "1" },
       { rank: "2", value: 2, unicodePart: "2" },
       { rank: "3", value: 3, unicodePart: "3" },
@@ -26,7 +26,7 @@ export default new Vuex.Store({
       { rank: "Queen", value: 10, unicodePart: "D" },
       { rank: "King", value: 10, unicodePart: "E" },
     ],
-    cardSuit: [
+    cardSuits: [
       { suit: "Clubs", unicode: "1F0D" },
       { suit: "Diamonds", unicode: "1F0C" },
       { suit: "Hearts", unicode: "1F0B" },
@@ -36,27 +36,26 @@ export default new Vuex.Store({
   mutations: {
     GENERATE_DECK_OF_CARDS(state) {
       state.deckOfCards = [];
-      for (let i = 0; i < state.cardSuit.length; i++) {
-        for (let j = 0; j < state.cardRank.length; j++) {
+      for (let i = 0; i < state.cardSuits.length; i++) {
+        for (let j = 0; j < state.cardRanks.length; j++) {
           state.deckOfCards.push(
             new Card(
-              state.cardSuit[i].suit,
-              state.cardRank[j].rank,
-              "&#x" + state.cardSuit[i].unicode + state.cardRank[j].unicodePart,
-              state.cardRank[j].value
+              state.cardSuits[i].suit,
+              state.cardRanks[j].rank,
+              "&#x" +
+                state.cardSuits[i].unicode +
+                state.cardRanks[j].unicodePart,
+              state.cardRanks[j].value
             )
           );
         }
       }
     },
-    // todo: gebruik argument destructuring om de payload om te zetten in losse variablen voor verkorte schrijfwijze:
-    // ADD_CARD_TO_HAND(state, { player, card }) {
-    // voor meer informatie zie: https://github.com/lukehoban/es6features#destructuring
-    ADD_CARD_TO_HAND(state, payload) {
-      if (payload.player == "player") {
-        state.cardsPlayer.push(payload.card);
+    ADD_CARD_TO_HAND(state, { player, card }) {
+      if (player == "player") {
+        state.cardsPlayer.push(card);
       } else {
-        state.cardsDealer.push(payload.card);
+        state.cardsDealer.push(card);
       }
     },
     DELETE_CARD_FROM_DECK(state, payload) {
@@ -82,17 +81,16 @@ export default new Vuex.Store({
         card: randomCard,
       });
     },
-    pass({commit}) {
+    pass({ commit }) {
       commit("SET_PASS_BOOLEAN_TRUE");
     },
-    initGame({dispatch}) {
+    initGame({ dispatch }) {
       dispatch("generateDeckOfCards");
       dispatch("hit", "player");
       dispatch("hit", "dealer");
       dispatch("hit", "player");
       dispatch("hit", "dealer");
-
-    }
+    },
   },
   getters: {
     deckOfCards: (state) => {
