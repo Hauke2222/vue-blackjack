@@ -1,12 +1,8 @@
 <template>
   <div>
-    <button
-      v-bind:disabled="hitButtonDisabled"
-      @click="$store.dispatch('hit', 'player')"
-    >
+    <button v-bind:disabled="hitButtonDisabled" @click="$store.dispatch('hit', 'player')">
       Hit
     </button>
-    <br />
     <button v-bind:disabled="passButtonDisabled" @click="pass()">
       Pass
     </button>
@@ -17,13 +13,13 @@
 export default {
   computed: {
     hitButtonDisabled() {
-      if (this.$store.getters.scorePlayer >= 21) {
+      if (this.$store.getters.scorePlayer >= 21 || this.$store.getters.winner != "") {
         return true;
       }
       return false;
     },
     passButtonDisabled() {
-      if (this.$store.getters.scoreDealer >= 17 && this.$store.getters.pass == true) {
+      if (this.$store.getters.scoreDealer >= 17 && this.$store.getters.pass == true || this.$store.getters.winner != "") {
         return true;
       }
       return false;
@@ -40,4 +36,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+button {
+  margin: 2px;
+}
+</style>

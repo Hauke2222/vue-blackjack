@@ -1,5 +1,5 @@
 <template>
-  <div>Winner: {{ winner }}</div>
+  <h2>Winner: {{ winner }}</h2>
 </template>
 
 <script>
